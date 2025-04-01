@@ -1,0 +1,13 @@
+[brew]
+curl
+git
+make
+zip
+unzip
+
+[apt]
+curl
+git
+make
+zip
+unzip

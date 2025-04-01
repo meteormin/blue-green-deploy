@@ -1,0 +1,25 @@
+http:
+  routers:
+    api:
+      rule: "PathPrefix(`/api`)"
+      service: "api"
+      entryPoints:
+        - "web"
+      middlewares:
+        - "replacePath"
+  services:
+    api:
+      loadBalancer:
+        passHostHeader: true
+        servers:
+          - url: "http://api-blue:8080"
+          - url: "http://api-green:8080"
+        healthCheck:
+          path: "/health"
+          interval: "5s"
+          timeout: "3s"
+  middlewares:
+    replacePath:
+      replacePathRegex:
+        regex: "^/api/(.*)"
+        replacement: "/$1"

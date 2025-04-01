@@ -1,0 +1,23 @@
+services:
+  traefik:
+    image: traefik:latest
+    container_name: traefik-proxy
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"
+    networks:
+      - shared_network
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8090:8080"
+    restart: unless-stopped
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "${STATIC_CONFIG:-}:/etc/traefik/traefik.yml"
+      - "${DYNAMIC_CONFIG:-}:/dynamic/conf"
+networks:
+  shared_network:
+    external: true

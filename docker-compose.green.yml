@@ -1,0 +1,20 @@
+services:
+  api-green:
+    image: api:${TAG:-latest}
+    container_name: api-green
+    environment:
+      - ENV=${ENV:-development}
+      - PORT=${PORT:-3000}
+    networks:
+      - shared_network
+    ports:
+      - "8080"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+networks:
+  shared_network:
+    external: true

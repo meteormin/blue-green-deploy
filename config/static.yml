@@ -1,0 +1,19 @@
+global:
+  checkNewVersion: true
+log:
+  level: DEBUG
+accessLog:
+  bufferingSize: 100
+entryPoints:
+  web:
+    address: ":80"
+api:
+  dashboard: true
+  insecure: true
+providers:
+  docker:
+    exposedByDefault: false
+    network: shared_network
+  file:
+    directory: /dynamic/conf
+    watch: true
