@@ -16,8 +16,8 @@ services:
     restart: unless-stopped
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - "${STATIC_CONFIG:-}:/etc/traefik/traefik.yml"
-      - "${DYNAMIC_CONFIG:-}:/dynamic/conf"
+      - "${STATIC_CONFIG:./config/static.yml}:/etc/traefik/traefik.yml"
+      - "${DYNAMIC_CONFIG:./config/dynamic}:/dynamic/conf"
 networks:
   shared_network:
     external: true
