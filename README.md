@@ -59,7 +59,7 @@ $ make build-docker
 $ make deploy
 
 # 정말 중단되지 않는지 학인 하기 위한 간단한 프로그램
-$ go run test/main.go
+$ go run client/main.go
 ```
 
 ### 결론
