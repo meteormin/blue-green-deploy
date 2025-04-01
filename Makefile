@@ -1,4 +1,4 @@
-PRJ_NAME=Friday.go
+PRJ_NAME=blue-green-deploy
 AUTHOR="Meteormin \(miniyu97@gmail.com\)"
 PRJ_BASE=$(shell pwd)
 PRJ_DESC=$(PRJ_NAME) Deployment and Development Makefile.\n Author: $(AUTHOR)
@@ -39,9 +39,9 @@ build:
 build:
 	@echo "[build] Building $(mod) for $(os)/$(arch)"
 ifeq ($(os), linux)
-	GOOS=$(os) GOARCH=$(arch) go build $(LDFLAGS) -o build/api-$(os)-$(arch) ./api/main.go
+	GOOS=$(os) GOARCH=$(arch) go build $(LDFLAGS) -o build/api-$(os)-$(arch) ./server/main.go
 else
-	GOOS=$(os) GOARCH=$(arch) go build -o build/api-$(os)-$(arch) ./api/main.go
+	GOOS=$(os) GOARCH=$(arch) go build -o build/api-$(os)-$(arch) ./server/main.go
 endif
 
 ##build-docker tag={tag [v1.0.0]}: build docker image
@@ -65,7 +65,7 @@ clean:
 .PHONY: run
 run:
 	@echo "[run] running application"
-	go run ./api/main.go
+	go run ./server/main.go
 
 ##deploy tag={tag [v1.0.0]}: deployment blue-green
 .PHONY: deploy
